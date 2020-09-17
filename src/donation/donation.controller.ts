@@ -2,6 +2,7 @@ import {Body, ClassSerializerInterceptor, Controller, HttpStatus, Post, Res, Use
 import {DonationService} from "./donation.service";
 import {Response} from "express";
 import {Donation} from "./donation.entity";
+import {EntityNotFoundException} from "../exceptions/EntityNotFoundException";
 
 @Controller('donations')
 export class DonationController {
@@ -18,8 +19,17 @@ export class DonationController {
                 res.status(HttpStatus.OK).json(result);
             })
             .catch(err => {
-                console.log(err);
-                throw err;
+                if (err instanceof EntityNotFoundException) {
+                    res.status(HttpStatus.NOT_FOUND).json({
+                        "code": "NOT_FOUND",
+                        "message": "Diese Donation gibt es nicht mehr"
+                    })
+                } else {
+                    res.status(HttpStatus.BAD_REQUEST).json({
+                        "code": "DONE",
+                        "message": "Diese Donation ist bereits vergeben"
+                    })
+                }
             });
     }
 }

@@ -22,6 +22,10 @@ export class DonationService {
             throw new EntityNotFoundException(null, null, 'donation');
         }
 
+        if(donation.done) {
+            throw new Error();
+        }
+
         donation.done = true;
 
         await this.donationRepository.save(donation);

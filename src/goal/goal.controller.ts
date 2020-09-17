@@ -16,6 +16,7 @@ export class GoalController {
                 res.status(HttpStatus.OK).json(result);
             })
             .catch(err => {
+                console.log(err);
                 throw err;
             });
     }
