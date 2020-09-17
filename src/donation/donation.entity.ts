@@ -17,5 +17,8 @@ export class Donation {
     done: boolean;
 
     @CreateDateColumn()
+    lud: Date;
+
+    @CreateDateColumn()
     iat: Date;
 }

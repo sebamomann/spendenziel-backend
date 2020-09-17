@@ -27,6 +27,7 @@ export class DonationService {
         }
 
         donation.done = true;
+        donation.lud = new Date();
 
         await this.donationRepository.save(donation);
 
