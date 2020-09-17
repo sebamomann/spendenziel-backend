@@ -5,11 +5,6 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
     app.use(function (req, res, next) {
-        const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://ec-heidelsheim.de', 'http://localhost:9000', 'http://localhost:4200'];
-        const origin = req.headers.origin;
-        if (allowedOrigins.indexOf(origin) > -1) {
-            res.setHeader('Access-Control-Allow-Origin', origin);
-        }
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET, OPTIONS, POST, PUT, DELETE');
         res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, X-Auth-Token, content-type');
